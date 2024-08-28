@@ -37,6 +37,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <unistd.h>
 #include "SKP_Silk_SDK_API.h"
 
 /* Define codec specific settings */
@@ -350,6 +351,13 @@ int main( int argc, char* argv[] )
     /* Write payload size */
     if( !tencent ) {
         fwrite( &nBytes, sizeof( SKP_int16 ), 1, bitOutFile );
+    } else {
+        // qqfile should remove 1 bytes
+        fseek(bitOutFile, -1L, SEEK_END);
+        long pos = ftell(bitOutFile);
+        if(pos >= 1) {
+            ftruncate(fileno(bitOutFile), pos);
+        }
     }
 
     /* Free Encoder */

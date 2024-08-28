@@ -118,7 +118,7 @@ $(TARGET): $(OBJS)
 	$(ARCHIVE.cmdline)
 
 encoder$(EXESUFFIX): $(ENCODER_OBJS)
-	$(LINK.o.cmdline)
+	$(LINK.o.cmdline) -o qqntencoder$(EXESUFFIX)
 
 decoder$(EXESUFFIX): $(DECODER_OBJS)
 	$(LINK.o.cmdline)
@@ -129,5 +129,5 @@ signalcompare$(EXESUFFIX): $(SIGNALCMP_OBJS)
 clean:
 	$(RM) $(TARGET)* $(OBJS) $(ENCODER_OBJS) $(DECODER_OBJS) \
 		  $(SIGNALCMP_OBJS) $(TEST_OBJS) \
-		  encoder$(EXESUFFIX) decoder$(EXESUFFIX) signalcompare$(EXESUFFIX)
+		  encoder$(EXESUFFIX) qqntencoder$(EXESUFFIX) decoder$(EXESUFFIX) signalcompare$(EXESUFFIX)
 
